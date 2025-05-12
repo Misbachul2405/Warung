@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -28,13 +28,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-   protected $hidden = [
-    'password',
-    'remember_token',
-    'two_factor_secret',
-    'two_factor_recovery_codes',
-    'two_factor_confirmed_at'
-];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at'
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -50,15 +50,15 @@ class User extends Authenticatable
     }
 
     /**
-    * getPermissionArray
-    *
-    * @return void
-    */
+     * getPermissionArray
+     *
+     * @return void
+     */
     public function getPermissionArray()
     {
         return $this->getAllPermissions()->mapWithKeys(function($pr){
-    return [$pr['name'] => true];
-    });
-
+            return [$pr['name'] => true];
+        });
+   
     }
 }
