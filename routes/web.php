@@ -16,10 +16,14 @@ Route::prefix('apps')->group(function() {
         //route dashboard
         Route::get('dashboard', App\Http\Controllers\Apps\DashboardController::class)->name('apps.dashboard');
 
-        Route::get('permissions', App\Http\Controllers\Apps\PermissionController::class)->name('apps.permissions')
-        ->middleware('permission:permissions.index');
+        //route permissions
+        Route::get('/permissions', [\App\Http\Controllers\Apps\PermissionController::class, 'index'])->name('apps.permissions.index');
 
-        Route::resource('roles', App\Http\Controllers\Apps\RoleController::class, ['as'=> 'apps'])
-        ->middleware('permission:roles.index|roles.create|roles.edit|roles.delete');
+        //route resource roles
+        Route::resource('/roles', \App\Http\Controllers\Apps\RoleController::class, ['as' => 'apps']);
+
+        //route resource users
+        Route::resource('/users', \App\Http\Controllers\Apps\UserController::class, ['as' => 'apps']);
+
     });
 });
