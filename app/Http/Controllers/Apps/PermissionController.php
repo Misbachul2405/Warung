@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers\Apps;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PermissionController extends Controller
+class PermissionController extends Controller implements HasMiddleware
 {
     /**
-     * Handle the incoming request.
+     * middleware
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(['permission:permissions.index'], only: ['index']),
+        ];
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function index()
     {
         //get permissions
         $permissions = Permission::when(request()->q, function($permissions) {

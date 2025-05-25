@@ -28,5 +28,7 @@ Route::prefix('apps')->group(function() {
         //route resource categories
         Route::resource('/categories', \App\Http\Controllers\Apps\CategoryController::class, ['as' => 'apps']);
 
+        //route resource products
+        Route::resource('/products', \App\Http\Controllers\Apps\ProductController::class, ['as' => 'apps']);
     });
 });
