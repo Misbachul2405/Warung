@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('invoice');
             $table->bigInteger('cash');
             $table->bigInteger('change');
-            $table->bigInteger('dicount');
+            $table->bigInteger('discount');
             $table->bigInteger('grand_total');
             $table->timestamps();
 
